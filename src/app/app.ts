@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { PainelAtendimento } from './painel-atendimento/painel-atendimento';
-import { Avisos } from './avisos/avisos';
+import { TemplateDrivenForm } from './template-driven-form/template-driven-form';
 
 @Component({
   selector: 'app-root',
-  imports: [PainelAtendimento, Avisos],
+  imports: [TemplateDrivenForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
