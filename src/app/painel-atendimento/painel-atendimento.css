@@ -1,0 +1,166 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f3f6fb;
+  font-family: Arial, sans-serif;
+  color: #1e293b;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 20px;
+}
+
+.painel {
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+}
+
+.etiqueta {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1 {
+  margin: 12px 0 8px;
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+header p {
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.campo label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+input,
+select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  background: white;
+}
+
+.resumo {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 24px;
+}
+
+.alta {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.media {
+  color: #b45309;
+  font-weight: bold;
+}
+
+.baixa {
+  color: #15803d;
+  font-weight: bold;
+}
+
+.acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+button.secundario {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.chamado {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.chamado-concluido {
+  border: 2px solid green;
+  background-color: #e8f5e9;
+}
+
+.chamado h3 {
+  font-size: 16px;
+  margin: 0 0 16px;
+}
+
+.chamado p {
+  margin: 8px 0;
+}
+
+.chamado .campo {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 480px) {
+  .painel {
+    padding: 20px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+}

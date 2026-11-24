@@ -1,0 +1,96 @@
+<main class="container">
+  <section class="painel" aria-labelledby="titulo-painel">
+    <header>
+      <span class="etiqueta">SUPORTE CORPORATIVO</span>
+      <h1 id="titulo-painel">{{ titulo }}</h1>
+      <p>Gerencie seus atendimentos de forma simples.</p>
+    </header>
+
+    <div class="campo">
+      <label for="nome">Nome da pessoa solicitante</label>
+      <input [(ngModel)]="nome" id="nome" type="text" placeholder="Digite seu nome" />
+    </div>
+
+    <div class="campo">
+      <label for="prioridade">Prioridade</label>
+      <select [(ngModel)]="prioridade" id="prioridade">
+        <option value="baixa">Baixa</option>
+        <option value="media" selected>Média</option>
+        <option value="alta">Alta</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="categoria">Categoria do chamado</label>
+      <select [(ngModel)]="categoriaSelecionada" id="categoria">
+        <option value="">Selecione uma categoria</option>
+        @for (categoria of categorias; track categoria) {
+          <option [value]="categoria">{{ categoria }}</option>
+        }
+      </select>
+    </div>
+
+    <section class="resumo" aria-labelledby="titulo-resumo">
+      <h2 id="titulo-resumo">Resumo do atendimento</h2>
+
+      <p>Solicitante: {{ nome || 'Nao informado' }}</p>
+
+      @if(prioridade === 'alta') {
+        <p class="alta">Atendimento prioritário</p>
+      } @else if (prioridade === 'media') {
+        <p class="media">Atendimento normal</p>
+      } @else {
+        <p class="baixa">Atendimento de baixa prioridade</p>
+      }
+
+      <p>Categoria selecionada: {{ categoriaSelecionada }}</p>
+
+      <div class="acoes">
+        <button (click)="adicionarChamado()" type="button">Realizar chamado</button>
+
+        <button (click)="limparChamados()" type="button" class="secundario">Limpar chamados</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="titulo-chamados">
+      <h2 id="titulo-chamados">Chamados registrados: {{ chamados.length }}</h2>
+
+      @for (chamado of chamados; track chamado.id) {
+        <article class="chamado" [class.chamado-concluido]="chamado.status === 'concluido'">
+          <h3>Chamado #{{ chamado.id }}</h3>
+
+          <p>Solicitante: {{ chamado.nome }}</p>
+          <p>Categoria: {{ chamado.categoria }}</p>
+          <p>Prioridade: {{ chamado.prioridade }}</p>
+
+          <div class="campo">
+            <label for="status-1">Status do chamado</label>
+
+            <select [(ngModel)]="chamado.status" id="status-1">
+              <option value="aberto">Aberto</option>
+              <option value="andamento">Em andamento</option>
+              <option value="concluido">Concluído</option>
+            </select>
+          </div>
+
+          @switch (chamado.status) {
+            @case ('aberto') {
+              <p>Atendimento aberto</p>
+            }
+            @case ('andamento') {
+              <p>Atendimento em andamento</p>
+            }
+            @case ('concluido') {
+              <p>Atendimento concluído</p>
+            }
+            @default {
+              <p>Status desconhecido</p>
+            }
+          }
+        </article>
+      } @empty {
+        <p>Nenhum chamado registrado até o momento</p>
+      }
+    </section>
+  </section>
+</main>

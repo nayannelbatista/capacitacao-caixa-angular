@@ -1,12 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { PainelAtendimento } from './painel-atendimento/painel-atendimento';
+import { Avisos } from './avisos/avisos';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [PainelAtendimento, Avisos],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('central-atendimento');
 }

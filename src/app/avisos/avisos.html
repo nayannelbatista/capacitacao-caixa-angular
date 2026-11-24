@@ -1,0 +1,61 @@
+<section class="painel">
+  <h2>{{ titulo }}</h2>
+
+  <div class="campo">
+    <label for="mensagem">Mensagem do aviso</label>
+    <input
+      id="mensagem"
+      type="text"
+      [(ngModel)]="mensagem"
+      placeholder="Digite um aviso"
+    />
+  </div>
+
+  <div class="campo">
+    <label for="tipo">Tipo do aviso</label>
+    <select id="tipo" [(ngModel)]="tipo">
+      <option value="informacao">Informação</option>
+      <option value="atencao">Atenção</option>
+      <option value="urgente">Urgente</option>
+    </select>
+  </div>
+
+  <button
+    type="button"
+    [disabled]="!mensagem.trim()"
+    (click)="publicarAviso()"
+  >
+    Publicar aviso
+  </button>
+
+  @if (avisos.length > 0) {
+    <p class="resumo">Existem avisos publicados.</p>
+  } @else {
+    <p class="resumo">Publique seu primeiro aviso!</p>
+  }
+
+  <h3>Avisos publicados ({{ avisos.length }})</h3>
+
+  @for (aviso of avisos; track aviso.id) {
+    <article class="aviso">
+      @switch (aviso.tipo) {
+        @case ('informacao') {
+          <strong>Informação</strong>
+        }
+        @case ('atencao') {
+          <strong>Atenção</strong>
+        }
+        @case ('urgente') {
+          <strong>Urgente</strong>
+        }
+        @default {
+          <strong>Aviso</strong>
+        }
+      }
+
+      <p>{{ aviso.mensagem }}</p>
+    </article>
+  } @empty {
+    <p>Nenhum aviso publicado.</p>
+  }
+</section>

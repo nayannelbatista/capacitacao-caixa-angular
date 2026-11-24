@@ -1,0 +1,77 @@
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
+}
+
+.painel {
+  max-width: 600px;
+  margin: 32px auto;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+}
+
+h2 {
+  margin-top: 0;
+  color: #1e3a8a;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.resumo {
+  margin-top: 20px;
+  color: #475569;
+}
+
+h3 {
+  margin-top: 24px;
+}
+
+.aviso {
+  padding: 14px;
+  margin-top: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.aviso strong {
+  color: #1e40af;
+}
+
+.aviso p {
+  margin-bottom: 0;
+}
