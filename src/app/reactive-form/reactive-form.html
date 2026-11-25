@@ -12,6 +12,12 @@
   <form [formGroup]="chamadoForm" (ngSubmit)="onSubmit()">
 
     @let nome = chamadoForm.controls.nome;
+    @let email = chamadoForm.controls.email;
+    @let departamento = chamadoForm.controls.departamento;
+    @let categoria = chamadoForm.controls.categoria;
+    @let prioridade = chamadoForm.controls.prioridade;
+    @let descricao = chamadoForm.controls.descricao;
+    @let aceitaTermos = chamadoForm.controls.aceitaTermos;
 
     <fieldset>
       <legend>01. Identificação</legend>
@@ -42,6 +48,16 @@
           <label for="email">E-mail corporativo *</label>
 
           <input formControlName="email" type="email" id="email" placeholder="nome@empresa.com" />
+
+          @if (email.invalid && (email.touched || email.dirty)) {
+            <span class="error-message">
+              @if (email.errors?.['required']) {
+                O e-mail é obrigatório.
+              } @else if (email.errors?.['email']) {
+                Informe um e-mail válido.
+              }
+            </span>
+          }
         </div>
 
         <div class="form-group">
@@ -55,6 +71,10 @@
             <option value="Comercial">Comercial</option>
             <option value="Administrativo">Administrativo</option>
           </select>
+
+          @if (departamento.invalid && (departamento.touched || departamento.dirty)) {
+            <span class="error-message">Selecione um departamento.</span>
+          }
         </div>
       </div>
     </fieldset>
@@ -74,6 +94,10 @@
             <option value="Software">Software</option>
             <option value="Outros">Outros</option>
           </select>
+
+          @if (categoria.invalid && (categoria.touched || categoria.dirty)) {
+            <span class="error-message">Selecione uma categoria.</span>
+          }
         </div>
 
         <div class="form-group">
@@ -84,6 +108,10 @@
             <option value="media" selected>Média</option>
             <option value="alta">Alta</option>
           </select>
+
+          @if (prioridade.invalid && (prioridade.touched || prioridade.dirty)) {
+            <span class="error-message">Selecione uma prioridade.</span>
+          }
         </div>
 
         <div class="form-group full-width">
@@ -95,6 +123,10 @@
             rows="5"
             placeholder="Descreva o problema, informe quando começou e outros detalhes relevantes..."
           ></textarea>
+
+          @if (descricao.invalid && (descricao.touched || descricao.dirty)) {
+            <span class="error-message">A descrição é obrigatória.</span>
+          }
 
           <span class="field-hint">
             Descreva sua solicitação com o máximo de detalhes possível.
@@ -109,6 +141,10 @@
           <input formControlName="aceitaTermos" type="checkbox" />
           <span>Confirmo que as informações fornecidas estão corretas.</span>
         </label>
+
+        @if (aceitaTermos.invalid && (aceitaTermos.touched || aceitaTermos.dirty)) {
+          <span class="error-message">Confirme que as informações fornecidas estão corretas.</span>
+        }
       </div>
 
       <button type="submit" [disabled]="chamadoForm.invalid">

@@ -79,6 +79,10 @@
             <option value="Comercial">Comercial</option>
             <option value="Administrativo">Administrativo</option>
           </select>
+
+          @if (departamento.invalid && (departamento.touched || departamento.dirty)) {
+            <span class="error-message">Selecione um departamento.</span>
+          }
         </div>
       </div>
     </fieldset>
@@ -104,6 +108,10 @@
             <option value="Software">Software</option>
             <option value="Outros">Outros</option>
           </select>
+
+          @if (categoria.invalid && (categoria.touched || categoria.dirty)) {
+            <span class="error-message">Selecione uma categoria.</span>
+          }
         </div>
 
         <div class="form-group">
@@ -120,6 +128,10 @@
             <option value="media">Média</option>
             <option value="alta">Alta</option>
           </select>
+
+          @if (prioridade.invalid && (prioridade.touched || prioridade.dirty)) {
+            <span class="error-message">Selecione uma prioridade.</span>
+          }
         </div>
 
         <div class="form-group full-width">
@@ -135,6 +147,16 @@
             rows="5"
             placeholder="Descreva o problema, informe quando começou e outros detalhes relevantes..."
           ></textarea>
+
+          @if (descricao.invalid && (descricao.touched || descricao.dirty)) {
+            <span class="error-message">
+              @if (descricao.errors?.['required']) {
+                A descrição é obrigatória.
+              } @else if (descricao.errors?.['minlength']) {
+                Informe pelo menos 10 caracteres.
+              }
+            </span>
+          }
 
           <span class="field-hint">
             Descreva sua solicitação com o máximo de detalhes possível.
@@ -155,6 +177,10 @@
             />
           <span>Confirmo que as informações fornecidas estão corretas.</span>
         </label>
+
+        @if (aceitaTermos.invalid && (aceitaTermos.touched || aceitaTermos.dirty)) {
+          <span class="error-message">Confirme que as informações fornecidas estão corretas.</span>
+        }
       </div>
 
       <button type="submit" [disabled]="chamadoForm.invalid">
