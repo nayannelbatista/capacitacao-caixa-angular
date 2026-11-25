@@ -1,16 +1,23 @@
 .menu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   padding: 12px 20px;
   background: #f1f6fb;
 }
 
-.menu a,
-.menu span {
+.menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: block;
   padding: 8px 10px;
   border-radius: 6px;
   color: #004580;
+  text-decoration: none;
 }
 
 .menu .ativo {
