@@ -1,0 +1,23 @@
+.pagina {
+  max-width: 880px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+.painel {
+  margin: 12px 0;
+  padding: 16px;
+  border: 1px solid #dbe3eb;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+a { color: #005ca9; }
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #005ca9;
+  border-radius: 6px;
+  background: white;
+  color: #005ca9;
+}

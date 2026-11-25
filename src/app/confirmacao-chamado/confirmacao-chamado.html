@@ -1,0 +1,13 @@
+<section class="confirmacao" aria-labelledby="titulo-confirmacao">
+  <h1 id="titulo-confirmacao">Solicitação registrada!</h1>
+  <p>Confira os dados informados nesta sessão.</p>
+  <dl>
+    <div><dt>Solicitante</dt><dd>{{ chamado.nome }}</dd></div>
+    <div><dt>E-mail</dt><dd>{{ chamado.email }}</dd></div>
+    <div><dt>Departamento</dt><dd>{{ chamado.departamento }}</dd></div>
+    <div><dt>Categoria</dt><dd>{{ chamado.categoria }}</dd></div>
+    <div><dt>Prioridade</dt><dd>{{ chamado.prioridade }}</dd></div>
+    <div><dt>Descrição</dt><dd>{{ chamado.descricao }}</dd></div>
+  </dl>
+  <button type="button" disabled>Abrir novo chamado</button>
+</section>

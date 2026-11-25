@@ -1,0 +1,15 @@
+<section class="pagina">
+  @if (chamado; as registro) {
+    <h1>{{ registro.titulo }}</h1>
+    <div class="painel">
+      <p>Chamado {{ registro.id }} · {{ registro.status }}</p>
+      <p>Categoria: {{ registro.categoria }}</p>
+      <p>{{ registro.descricao }}</p>
+    </div>
+  } @else {
+    <h1>Chamado não encontrado</h1>
+    <p>O identificador informado não corresponde a um chamado da lista.</p>
+  }
+
+  <button type="button" disabled>Voltar para a lista</button>
+</section>

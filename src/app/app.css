@@ -1,0 +1,19 @@
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px;
+  background: #f1f6fb;
+}
+
+.menu a,
+.menu span {
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #004580;
+}
+
+.menu .ativo {
+  color: white;
+  background: #005ca9;
+}
