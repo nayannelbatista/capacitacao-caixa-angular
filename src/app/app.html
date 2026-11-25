@@ -1,17 +1,18 @@
-<!-- Aula 02 - Control Flow e Data Binding -->
-<!--
-<app-avisos />
-<app-painel-atendimento />
--->
-
-<!-- Aula 03 - Formulários -->
-<!-- <app-template-driven-form /> -->
-
 <nav class="menu" aria-label="Navegação principal">
-  <span>Chamados</span>
-  <span>Formulário reativo</span>
-  <span>Formulário template-driven</span>
-  <span>Desafio legado</span>
+  <ul>
+    <li>
+      <a routerLink="/chamados" routerLinkActive="ativo">Chamados</a>
+    </li>
+    <li>
+      <a routerLink="/formulario/reativo" routerLinkActive="ativo">Formulário reativo</a>
+    </li>
+    <li>
+      <a routerLink="/formulario/template-driven" routerLinkActive="ativo">Formulário template-driven</a>
+    </li>
+    <li>
+      <a routerLink="/desafio-legado" routerLinkActive="ativo">Desafio legado</a>
+    </li>
+  </ul>
 </nav>
 
-<app-reactive-form />
+<router-outlet />

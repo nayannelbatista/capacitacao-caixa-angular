@@ -1,12 +1,13 @@
 <section class="pagina">
   <h1>Chamados</h1>
   <p>Consulte os registros fictícios de atendimento.</p>
-  <p><span>Abrir chamado</span></p>
+  <p><a routerLink="/formulario/reativo">Abrir chamado</a></p>
 
   @for (chamado of chamados; track chamado.id) {
     <article class="painel">
       <h2>{{ chamado.titulo }}</h2>
       <p>{{ chamado.categoria }} · {{ chamado.status }}</p>
+      <a [routerLink]="['/chamados', chamado.id]">Ver detalhes</a>
     </article>
   }
 </section>
