@@ -1,0 +1,194 @@
+<section class="form-section">
+  @if (!chamadoEnviado) {
+    <header class="section-header">
+      <div>
+        <span class="section-tag">DESAFIO · FORMULÁRIO LEGADO</span>
+        <h1>Abertura de chamado</h1>
+        <p>Informe os dados abaixo para registrar sua solicitação junto à equipe de suporte.</p>
+      </div>
+    </header>
+    <form [formGroup]="chamadoForm" (ngSubmit)="onSubmit(departamento, prioridade, aceitaTermos)">
+      <fieldset>
+        <legend>01. Identificação</legend>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="nome">Nome completo *</label
+            ><input
+              type="text"
+              id="nome"
+              formControlName="nome"
+              [(ngModel)]="chamado.nome"
+              placeholder="Digite seu nome completo"
+            />
+            @if (chamadoForm.get('nome')?.invalid && chamadoForm.get('nome')?.touched) {
+              <span class="error-message">
+                @if (chamadoForm.get('nome')?.errors?.['required']) {
+                  O nome é obrigatório.
+                } @else if (chamadoForm.get('nome')?.errors?.['minlength']) {
+                  Informe pelo menos 3 caracteres.
+                }
+              </span>
+            }
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail corporativo *</label
+            ><input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="nome@empresa.com"
+            />
+            @if (chamadoForm.get('email')?.invalid && chamadoForm.get('email')?.touched) {
+              <span class="error-message">
+                @if (chamadoForm.get('email')?.errors?.['required']) {
+                  O e-mail é obrigatório.
+                } @else if (chamadoForm.get('email')?.errors?.['email']) {
+                  Informe um e-mail válido.
+                }
+              </span>
+            }
+          </div>
+          <div class="form-group">
+            <label for="departamento">Departamento *</label
+            ><select
+              id="departamento"
+              name="departamento"
+              [(ngModel)]="chamado.departamento"
+              #departamento="ngModel"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            >
+              <option value="" disabled>Selecione</option>
+              <option value="Financeiro">Financeiro</option>
+              <option value="Recursos Humanos">Recursos Humanos</option>
+              <option value="Tecnologia">Tecnologia</option>
+              <option value="Comercial">Comercial</option>
+              <option value="Administrativo">Administrativo</option>
+            </select>
+            @if (departamento.invalid && departamento.touched) {
+              <span class="error-message">Selecione um departamento.</span>
+            }
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>02. Detalhes da solicitação</legend>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="categoria">Categoria *</label
+            ><select id="categoria" formControlName="categoria">
+              <option value="" disabled>Selecione uma categoria</option>
+              <option value="Acesso ao sistema">Acesso ao sistema</option>
+              <option value="Equipamento">Equipamento</option>
+              <option value="Rede e internet">Rede e internet</option>
+              <option value="Software">Software</option>
+              <option value="Outros">Outros</option>
+            </select>
+            @if (chamadoForm.get('categoria')?.invalid && chamadoForm.get('categoria')?.touched) {
+              <span class="error-message">Selecione uma categoria.</span>
+            }
+          </div>
+          <div class="form-group">
+            <label for="prioridade">Prioridade *</label
+            ><select
+              id="prioridade"
+              name="prioridade"
+              [(ngModel)]="chamado.prioridade"
+              #prioridade="ngModel"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            >
+              <option value="baixa">Baixa</option>
+              <option value="media">Média</option>
+              <option value="alta">Alta</option>
+            </select>
+            @if (prioridade.invalid && prioridade.touched) {
+              <span class="error-message">Selecione uma prioridade.</span>
+            }
+          </div>
+          <div class="form-group full-width">
+            <label for="descricao">Descrição do problema *</label
+            ><textarea
+              id="descricao"
+              formControlName="descricao"
+              rows="5"
+              placeholder="Descreva o problema, informe quando começou e outros detalhes relevantes..."
+            ></textarea
+            ><span class="field-hint"
+              >Descreva sua solicitação com o máximo de detalhes possível.</span
+            >
+            @if (chamadoForm.get('descricao')?.invalid && chamadoForm.get('descricao')?.touched) {
+              <span class="error-message">
+                @if (chamadoForm.get('descricao')?.errors?.['required']) {
+                  A descrição é obrigatória.
+                } @else if (chamadoForm.get('descricao')?.errors?.['minlength']) {
+                  Informe pelo menos 10 caracteres.
+                }
+              </span>
+            }
+          </div>
+        </div>
+      </fieldset>
+      <footer class="form-footer">
+        <div class="terms-area">
+          <label class="checkbox-option"
+            ><input
+              type="checkbox"
+              name="aceitaTermos"
+              [(ngModel)]="chamado.aceitaTermos"
+              #aceitaTermos="ngModel"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            /><span>Confirmo que as informações fornecidas estão corretas.</span></label
+          >
+          @if (aceitaTermos.invalid && aceitaTermos.touched) {
+            <span class="error-message">É necessário confirmar as informações.</span>
+          }
+        </div>
+        <button
+          type="submit"
+          [disabled]="
+            chamadoForm.invalid ||
+            departamento.invalid ||
+            prioridade.invalid ||
+            aceitaTermos.invalid
+          "
+        >
+          Registrar chamado <span aria-hidden="true">→</span>
+        </button>
+      </footer>
+      <p class="required-hint">* Campos de preenchimento obrigatório</p>
+    </form>
+  } @else {
+    <section class="success-screen">
+      <div class="success-icon">✓</div>
+      <h2>Solicitação registrada!</h2>
+      <p>Seu chamado foi enviado com sucesso.</p>
+      <div class="summary">
+        <h3>Resumo do chamado</h3>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span>Nome completo</span><strong>{{ chamadoForm.get('nome')?.value }}</strong>
+          </div>
+          <div class="summary-item">
+            <span>E-mail corporativo</span><strong>{{ chamadoForm.get('email')?.value }}</strong>
+          </div>
+          <div class="summary-item">
+            <span>Departamento</span><strong>{{ chamado.departamento }}</strong>
+          </div>
+          <div class="summary-item">
+            <span>Categoria</span><strong>{{ chamadoForm.get('categoria')?.value }}</strong>
+          </div>
+          <div class="summary-item">
+            <span>Prioridade</span><strong>{{ chamado.prioridade }}</strong>
+          </div>
+          <div class="summary-item summary-description">
+            <span>Descrição</span><strong>{{ chamadoForm.get('descricao')?.value }}</strong>
+          </div>
+        </div>
+      </div>
+      <h3>Deseja abrir outro chamado?</h3>
+      <button type="button" (click)="iniciarNovoChamado()">Sim, abrir novo chamado</button>
+    </section>
+  }
+</section>

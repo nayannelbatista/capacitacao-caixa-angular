@@ -1,4 +1,3 @@
-
 <section class="form-section">
   <header class="section-header">
     <div>
@@ -8,7 +7,7 @@
     </div>
   </header>
 
-  <form>
+  <form #chamadoForm="ngForm" (ngSubmit)="onSubmit(chamadoForm)">
     <fieldset>
       <legend>01. Identificação</legend>
 
@@ -20,8 +19,22 @@
             type="text"
             id="nome"
             name="nome"
+            required
+            minlength="3"
+            [(ngModel)]="chamado.nome"
+            #nome="ngModel"
             placeholder="Digite seu nome completo"
           />
+
+          @if(nome.invalid && (nome.touched || nome.dirty)) {
+            <span class="error-message">
+              @if(nome.errors?.['required']) {
+                O nome é obrigatório
+              } @else if (nome.errors?.['minlength']) {
+                Informe pelo menos 3 caracteres
+              }
+            </span>
+          }
         </div>
 
         <div class="form-group">
@@ -31,15 +44,35 @@
             type="email"
             id="email"
             name="email"
+            required
+            email
+            #email="ngModel"
+            [(ngModel)]="chamado.email"
             placeholder="nome@empresa.com"
           />
+
+          @if(email.invalid && (email.touched || email.dirty)) {
+            <span class="error-message">
+              @if(email.errors?.['required']) {
+                O email é obrigatório
+              } @else if (email.errors?.['email']) {
+                Informe um e-mail válido
+              }
+            </span>
+          }
         </div>
 
         <div class="form-group">
           <label for="departamento">Departamento *</label>
 
-          <select id="departamento" name="departamento">
-            <option value="" disabled selected>Selecione</option>
+          <select
+            required
+            id="departamento"
+            name="departamento"
+            [(ngModel)]="chamado.departamento"
+            #departamento="ngModel"
+            >
+            <option value="" disabled>Selecione</option>
             <option value="Financeiro">Financeiro</option>
             <option value="Recursos Humanos">Recursos Humanos</option>
             <option value="Tecnologia">Tecnologia</option>
@@ -57,8 +90,14 @@
         <div class="form-group">
           <label for="categoria">Categoria *</label>
 
-          <select id="categoria" name="categoria">
-            <option value="" disabled selected>Selecione uma categoria</option>
+          <select
+            required
+            id="categoria"
+            name="categoria"
+            [(ngModel)]="chamado.categoria"
+            #categoria="ngModel"
+            >
+            <option value="" disabled>Selecione uma categoria</option>
             <option value="Acesso ao sistema">Acesso ao sistema</option>
             <option value="Equipamento">Equipamento</option>
             <option value="Rede e internet">Rede e internet</option>
@@ -70,9 +109,15 @@
         <div class="form-group">
           <label for="prioridade">Prioridade *</label>
 
-          <select id="prioridade" name="prioridade">
+          <select
+            required
+            id="prioridade"
+            name="prioridade"
+            [(ngModel)]="chamado.prioridade"
+            #prioridade="ngModel"
+            >
             <option value="baixa">Baixa</option>
-            <option value="media" selected>Média</option>
+            <option value="media">Média</option>
             <option value="alta">Alta</option>
           </select>
         </div>
@@ -83,6 +128,10 @@
           <textarea
             id="descricao"
             name="descricao"
+            [(ngModel)]="chamado.descricao"
+            required
+            #descricao="ngModel"
+            minlength="10"
             rows="5"
             placeholder="Descreva o problema, informe quando começou e outros detalhes relevantes..."
           ></textarea>
@@ -97,12 +146,18 @@
     <footer class="form-footer">
       <div class="terms-area">
         <label class="checkbox-option">
-          <input type="checkbox" name="aceitaTermos" />
+          <input
+            required
+            type="checkbox"
+            name="aceitaTermos"
+            [(ngModel)]="chamado.aceitaTermos"
+            #aceitaTermos="ngModel"
+            />
           <span>Confirmo que as informações fornecidas estão corretas.</span>
         </label>
       </div>
 
-      <button type="submit">
+      <button type="submit" [disabled]="chamadoForm.invalid">
         Registrar chamado
         <span aria-hidden="true">→</span>
       </button>

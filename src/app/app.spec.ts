@@ -14,10 +14,10 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render the attendance panel title', async () => {
+  it('should render the reactive form', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Central de atendimento');
+    expect(compiled.querySelector('app-reactive-form h1')?.textContent).toContain('Abertura de chamado');
   });
 });
