@@ -1,0 +1,25 @@
+{
+  "chamados": [
+    {
+      "id": "101",
+      "titulo": "Acesso ao portal interno",
+      "categoria": "Acesso ao sistema",
+      "status": "Aberto",
+      "descricao": "O portal interno exibe uma mensagem de acesso negado."
+    },
+    {
+      "id": "102",
+      "titulo": "Monitor sem imagem",
+      "categoria": "Equipamento",
+      "status": "Em andamento",
+      "descricao": "O monitor da estação liga, mas não mostra imagem."
+    },
+    {
+      "id": "103",
+      "titulo": "Conexão instável",
+      "categoria": "Rede e internet",
+      "status": "Concluído",
+      "descricao": "A conexão foi restabelecida após a revisão do ponto de rede."
+    }
+  ]
+}
