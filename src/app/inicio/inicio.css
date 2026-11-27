@@ -1,0 +1,16 @@
+.pagina {
+  max-width: 880px;
+  margin: 32px auto;
+  padding: 0 20px;
+  color: #24364b;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  color: #004580;
+}
+
+a {
+  color: #005ca9;
+}

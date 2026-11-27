@@ -6,10 +6,13 @@ import { DesafioFormularioLegado } from './desafio-formulario-legado/desafio-for
 import { PaginaNaoEncontrada } from './pagina-nao-encontrada/pagina-nao-encontrada';
 import { ChamadoDetalhe } from './chamados/chamado-detalhe/chamado-detalhe';
 
+import { Inicio } from './inicio/inicio';
+import { Faq } from './faq/faq';
+
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'chamados',
+    component: Inicio,
     pathMatch: 'full'
   },
   {
@@ -29,8 +32,16 @@ export const routes: Routes = [
     component: DesafioFormularioLegado
   },
   {
+    path: 'chamados/:id/editar',
+    component: ReactiveForm
+  },
+  {
     path: 'chamados/:id',
     component: ChamadoDetalhe
+  },
+  {
+    path: 'faq',
+    component: Faq,
   },
   {
     path: '**',

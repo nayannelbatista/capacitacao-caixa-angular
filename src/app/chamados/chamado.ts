@@ -5,3 +5,5 @@ export interface Chamado {
   status: string;
   descricao: string;
 }
+
+export const STATUS_CHAMADO = ['Aberto', 'Em andamento', 'Concluído'];

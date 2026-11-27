@@ -1,0 +1,25 @@
+.pagina {
+  max-width: 880px;
+  margin: 32px auto;
+  padding: 0 20px;
+  color: #24364b;
+  line-height: 1.5;
+}
+
+h1,
+h2 {
+  color: #004580;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  margin: 24px 0 8px;
+  font-size: 18px;
+}
+
+p {
+  margin: 0;
+}

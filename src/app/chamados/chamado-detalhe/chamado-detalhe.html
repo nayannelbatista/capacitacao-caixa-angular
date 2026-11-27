@@ -6,10 +6,21 @@
       <p>Categoria: {{ registro.categoria }}</p>
       <p>{{ registro.descricao }}</p>
     </div>
+    @if (erroExclusao) {
+      <p role="alert">{{ erroExclusao }}</p>
+    }
+    @if (!excluindo) {
+      <a [routerLink]="['/chamados', registro.id, 'editar']">Editar chamado</a>
+    }
+    <button type="button" (click)="excluir()" [disabled]="excluindo">Excluir chamado</button>
+  } @else if (carregando) {
+    <p role="status">Carregando chamado…</p>
+  } @else if (erroConsulta) {
+    <p role="alert">{{ erroConsulta }}</p>
   } @else {
     <h1>Chamado não encontrado</h1>
     <p>O identificador informado não corresponde a um chamado da lista.</p>
   }
 
-  <button type="button" (click)="voltar()">Voltar para a lista</button>
+  <button type="button" (click)="voltar()" [disabled]="excluindo">Voltar para a lista</button>
 </section>

@@ -1,16 +1,18 @@
 <nav class="menu" aria-label="Navegação principal">
   <ul>
     <li>
-      <a routerLink="/chamados" routerLinkActive="ativo">Chamados</a>
+      <a routerLink="/" routerLinkActive="ativo" [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page">Início</a>
     </li>
     <li>
-      <a routerLink="/formulario/reativo" routerLinkActive="ativo">Formulário reativo</a>
+      <a routerLink="/chamados" routerLinkActive="ativo" ariaCurrentWhenActive="page">Chamados</a>
     </li>
     <li>
-      <a routerLink="/formulario/template-driven" routerLinkActive="ativo">Formulário template-driven</a>
+      <a routerLink="/formulario/reativo" routerLinkActive="ativo"
+        ariaCurrentWhenActive="page">Abrir chamado</a>
     </li>
     <li>
-      <a routerLink="/desafio-legado" routerLinkActive="ativo">Desafio legado</a>
+      <a routerLink="/faq" routerLinkActive="ativo" ariaCurrentWhenActive="page">FAQ</a>
     </li>
   </ul>
 </nav>

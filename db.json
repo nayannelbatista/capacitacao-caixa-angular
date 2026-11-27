@@ -2,16 +2,16 @@
   "chamados": [
     {
       "id": "101",
-      "titulo": "Acesso ao portal interno",
-      "categoria": "Acesso ao sistema",
+      "titulo": "Falha no acesso ao e-mail",
+      "categoria": "Software",
       "status": "Aberto",
-      "descricao": "O portal interno exibe uma mensagem de acesso negado."
+      "descricao": "Não foi possível acessar o e-mail corporativo."
     },
     {
       "id": "102",
       "titulo": "Monitor sem imagem",
       "categoria": "Equipamento",
-      "status": "Em andamento",
+      "status": "Concluído",
       "descricao": "O monitor da estação liga, mas não mostra imagem."
     },
     {
@@ -20,6 +20,56 @@
       "categoria": "Rede e internet",
       "status": "Concluído",
       "descricao": "A conexão foi restabelecida após a revisão do ponto de rede."
+    },
+    {
+      "id": "104",
+      "titulo": "Acesso ao portal interno",
+      "categoria": "Software",
+      "status": "Em andamento",
+      "descricao": "Erro ao acessar o portal interno."
+    },
+    {
+      "id": "105",
+      "titulo": "Impressora sem conexão",
+      "categoria": "Equipamento",
+      "status": "Aberto",
+      "descricao": "A impressora não está disponível na rede."
+    },
+    {
+      "id": "106",
+      "titulo": "Atualização de software",
+      "categoria": "Software",
+      "status": "Concluído",
+      "descricao": "A atualização foi realizada com sucesso."
+    },
+    {
+      "id": "107",
+      "titulo": "Problema de acesso à VPN",
+      "categoria": "Rede e internet",
+      "status": "Aberto",
+      "descricao": "Não foi possível estabelecer uma conexão VPN."
+    },
+    {
+      "id": "108",
+      "titulo": "Teclado com defeito",
+      "categoria": "Equipamento",
+      "status": "Em andamento",
+      "descricao": "Algumas teclas não estão funcionando."
+    },
+    {
+      "id": "109",
+      "titulo": "Instalação de aplicativo",
+      "categoria": "Software",
+      "status": "Aberto",
+      "descricao": "Solicitação de instalação de aplicativo corporativo."
+    },
+    {
+      "id": "110",
+      "titulo": "Acesso à rede interna",
+      "categoria": "Rede e internet",
+      "status": "Em andamento",
+      "descricao": "Falha de autenticação na rede interna."
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

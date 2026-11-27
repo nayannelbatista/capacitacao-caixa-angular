@@ -3,11 +3,36 @@
   <p>Consulte os registros fictícios de atendimento.</p>
   <p><a routerLink="/formulario/reativo">Abrir chamado</a></p>
 
-  @for (chamado of chamados; track chamado.id) {
-    <article class="painel">
-      <h2>{{ chamado.titulo }}</h2>
-      <p>{{ chamado.categoria }} · {{ chamado.status }}</p>
-      <a [routerLink]="['/chamados', chamado.id]">Ver detalhes</a>
-    </article>
+  <div class="filtros">
+    <label for="busca">
+      Buscar por título
+      <input id="busca" type="search" [formControl]="busca" />
+    </label>
+
+    <label for="filtro-status">
+      Status
+      <select id="filtro-status" [formControl]="filtroStatus">
+        <option value="">Todos</option>
+        @for (status of statusDisponiveis; track status) {
+          <option [value]="status">{{ status }}</option>
+        }
+      </select>
+    </label>
+  </div>
+
+  @if (carregando) {
+    <p role="status">Carregando chamados…</p>
+  } @else if (erro) {
+    <p role="alert">{{ erro }}</p>
+  } @else {
+    @for (chamado of chamados; track chamado.id) {
+      <article class="painel">
+        <h2>{{ chamado.titulo }}</h2>
+        <p>{{ chamado.categoria }} · {{ chamado.status }}</p>
+        <a [routerLink]="['/chamados', chamado.id]">Ver detalhes</a>
+      </article>
+    } @empty {
+      <p>Nenhum chamado encontrado.</p>
+    }
   }
 </section>

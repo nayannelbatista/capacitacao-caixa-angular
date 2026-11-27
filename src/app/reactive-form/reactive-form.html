@@ -2,157 +2,65 @@
   <header class="section-header">
     <div>
       <span class="section-tag">ABORDAGEM 02 · REACTIVE FORMS</span>
-      <h1>Abertura de chamado</h1>
-      <p>Informe os dados abaixo para registrar sua solicitação junto à equipe de suporte.</p>
+      <h1>{{ id ? 'Edição de chamado' : 'Abertura de chamado' }}</h1>
+      <p>Informe os dados da solicitação para a equipe de suporte.</p>
     </div>
   </header>
 
-  <!-- <pre>{{ chamadoForm.value | json }}</pre> -->
+  @if (erro) {
+    <p class="error-message" role="alert">{{ erro }}</p>
+  }
 
-  <form [formGroup]="chamadoForm" (ngSubmit)="onSubmit()">
+  @if (carregando) {
+    <p role="status">Carregando chamado…</p>
+  } @else if (!falhaAoCarregar) {
+    <form [formGroup]="chamadoForm" (ngSubmit)="onSubmit()">
+      <fieldset [disabled]="salvando">
+        <legend>Detalhes da solicitação</legend>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="titulo">Título *</label>
+            <input id="titulo" type="text" formControlName="titulo" required />
+          </div>
 
-    @let nome = chamadoForm.controls.nome;
-    @let email = chamadoForm.controls.email;
-    @let departamento = chamadoForm.controls.departamento;
-    @let categoria = chamadoForm.controls.categoria;
-    @let prioridade = chamadoForm.controls.prioridade;
-    @let descricao = chamadoForm.controls.descricao;
-    @let aceitaTermos = chamadoForm.controls.aceitaTermos;
+          <div class="form-group">
+            <label for="categoria">Categoria *</label>
+            <select id="categoria" formControlName="categoria" required>
+              <option value="" disabled>Selecione uma categoria</option>
+              <option value="Acesso ao sistema">Acesso ao sistema</option>
+              <option value="Equipamento">Equipamento</option>
+              <option value="Rede e internet">Rede e internet</option>
+              <option value="Software">Software</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
 
-    <fieldset>
-      <legend>01. Identificação</legend>
-
-      <div class="form-grid">
-        <div class="form-group full-width">
-          <label for="nome">Nome completo *</label>
-
-          <input
-            type="text"
-            id="nome"
-            placeholder="Digite seu nome completo"
-            formControlName="nome"
-          />
-
-          @if (nome.invalid && (nome.touched || nome.dirty)) {
-                <span class="error-message">
-                  @if (nome.errors?.['required']) {
-                    O nome é obrigatório.
-                  } @else if (nome.errors?.['minlength']) {
-                    Informe pelo menos 3 caracteres.
-                  }
-                </span>
-              }
-        </div>
-
-        <div class="form-group">
-          <label for="email">E-mail corporativo *</label>
-
-          <input formControlName="email" type="email" id="email" placeholder="nome@empresa.com" />
-
-          @if (email.invalid && (email.touched || email.dirty)) {
-            <span class="error-message">
-              @if (email.errors?.['required']) {
-                O e-mail é obrigatório.
-              } @else if (email.errors?.['email']) {
-                Informe um e-mail válido.
-              }
-            </span>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="departamento">Departamento *</label>
-
-          <select formControlName="departamento" id="departamento">
-            <option value="" disabled>Selecione</option>
-            <option value="Financeiro">Financeiro</option>
-            <option value="Recursos Humanos">Recursos Humanos</option>
-            <option value="Tecnologia">Tecnologia</option>
-            <option value="Comercial">Comercial</option>
-            <option value="Administrativo">Administrativo</option>
-          </select>
-
-          @if (departamento.invalid && (departamento.touched || departamento.dirty)) {
-            <span class="error-message">Selecione um departamento.</span>
-          }
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>02. Detalhes da solicitação</legend>
-
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="categoria">Categoria *</label>
-
-          <select formControlName="categoria" id="categoria">
-            <option value="" disabled>Selecione uma categoria</option>
-            <option value="Acesso ao sistema">Acesso ao sistema</option>
-            <option value="Equipamento">Equipamento</option>
-            <option value="Rede e internet">Rede e internet</option>
-            <option value="Software">Software</option>
-            <option value="Outros">Outros</option>
-          </select>
-
-          @if (categoria.invalid && (categoria.touched || categoria.dirty)) {
-            <span class="error-message">Selecione uma categoria.</span>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="prioridade">Prioridade *</label>
-
-          <select formControlName="prioridade" id="prioridade">
-            <option value="baixa">Baixa</option>
-            <option value="media" selected>Média</option>
-            <option value="alta">Alta</option>
-          </select>
-
-          @if (prioridade.invalid && (prioridade.touched || prioridade.dirty)) {
-            <span class="error-message">Selecione uma prioridade.</span>
-          }
-        </div>
-
-        <div class="form-group full-width">
-          <label for="descricao">Descrição do problema *</label>
-
-          <textarea
-            formControlName="descricao"
-            id="descricao"
-            rows="5"
-            placeholder="Descreva o problema, informe quando começou e outros detalhes relevantes..."
-          ></textarea>
-
-          @if (descricao.invalid && (descricao.touched || descricao.dirty)) {
-            <span class="error-message">A descrição é obrigatória.</span>
+          @if (id) {
+            <div class="form-group">
+              <label for="status">Status *</label>
+              <select id="status" formControlName="status" required>
+                @for (status of statusDisponiveis; track status) {
+                  <option [value]="status">{{ status }}</option>
+                }
+              </select>
+            </div>
           }
 
-          <span class="field-hint">
-            Descreva sua solicitação com o máximo de detalhes possível.
-          </span>
+          <div class="form-group full-width">
+            <label for="descricao">Descrição do problema *</label>
+            <textarea id="descricao" formControlName="descricao" rows="5" required></textarea>
+          </div>
         </div>
-      </div>
-    </fieldset>
+      </fieldset>
 
-    <footer class="form-footer">
-      <div class="terms-area">
-        <label class="checkbox-option">
-          <input formControlName="aceitaTermos" type="checkbox" />
-          <span>Confirmo que as informações fornecidas estão corretas.</span>
-        </label>
+      <footer class="form-footer">
+        <p class="required-hint">* Campos de preenchimento obrigatório</p>
+        <button type="submit" [disabled]="chamadoForm.invalid || salvando">
+          {{ id ? 'Salvar alterações' : 'Registrar chamado' }}
+        </button>
+      </footer>
+    </form>
+  }
 
-        @if (aceitaTermos.invalid && (aceitaTermos.touched || aceitaTermos.dirty)) {
-          <span class="error-message">Confirme que as informações fornecidas estão corretas.</span>
-        }
-      </div>
-
-      <button type="submit" [disabled]="chamadoForm.invalid">
-        Registrar chamado
-        <span aria-hidden="true">→</span>
-      </button>
-    </footer>
-
-    <p class="required-hint">* Campos de preenchimento obrigatório</p>
-  </form>
+  <a [routerLink]="id ? ['/chamados', id] : ['/chamados']">Cancelar</a>
 </section>
