@@ -69,6 +69,20 @@
       "categoria": "Rede e internet",
       "status": "Em andamento",
       "descricao": "Falha de autenticação na rede interna."
+    },
+    {
+      "titulo": "grhdeth",
+      "categoria": "Rede e internet",
+      "status": "Aberto",
+      "descricao": "hbtdehdth",
+      "id": "mkmHjdwFJqc"
+    },
+    {
+      "titulo": "bgdndgngdfnm",
+      "categoria": "Rede e internet",
+      "status": "Aberto",
+      "descricao": "gnnjfgyrjsryj",
+      "id": "LoAwFDc8szU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

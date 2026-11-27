@@ -14,3 +14,19 @@ h1 {
 a {
   color: #005ca9;
 }
+
+.indicador {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  background: #f0f6fc;
+  border: 1px solid #d5e2ef;
+  border-radius: 8px;
+  color: #005ca9;
+}
+
+.indicador strong {
+  font-size: 36px;
+}

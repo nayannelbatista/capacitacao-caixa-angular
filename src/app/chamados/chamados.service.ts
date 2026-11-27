@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Chamado } from './chamado';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { count, map, Observable, retry, tap, throwError, timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,15 @@ export class ChamadosService {
   listarChamados(): Observable<Chamado[]> {
     return this.http.get<Chamado[]>(this.apiUrl);
   }
+
+  obterTotalChamados(): Observable<number> {
+    return this.listarChamados().pipe(
+      tap((chamados) => console.log('Antes do map:', chamados)),
+      map(chamados => chamados.length),
+      tap((total) => console.log('Depois do map:', total))
+    )
+  }
+
 
   buscarPorId(id: string): Observable<Chamado> {
     return this.http.get<Chamado>(`${this.apiUrl}/${id}`);
@@ -26,15 +35,9 @@ export class ChamadosService {
     return this.http.put<Chamado>(`${this.apiUrl}/${id}`, dados);
   }
 
-  excluirChamado(id: string): Observable<unknown> {
-    return this.http.delete<unknown>(`${this.apiUrl}/${id}`);
+  excluirChamado(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
-
-  // consultarChamados(titulo: string, status: string): Observable<Chamado[]> {
-  //   return this.http.get<Chamado[]>(
-  //     `${this.apiUrl}?titulo:contains=${titulo}&status=${status}`
-  //   );
-  // }
 
   consultarChamados(titulo: string, status: string): Observable<Chamado[]> {
     let params = new HttpParams();
@@ -46,6 +49,16 @@ export class ChamadosService {
       params = params.set('status', status);
     }
 
-    return this.http.get<Chamado[]>(this.apiUrl, { params });
+    return this.http.get<Chamado[]>(this.apiUrl, { params }).pipe(
+      retry({
+        count: 2,
+        delay: (erro: HttpErrorResponse) => {
+          if(erro.status === 0 || erro.status === 503) {
+            return timer(5000);
+          }
+          return throwError(() => erro)
+        }
+      })
+    );
   }
 }

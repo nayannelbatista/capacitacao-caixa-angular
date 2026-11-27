@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, finalize, of, Subscription } from 'rxjs';
 import { Chamado, STATUS_CHAMADO } from '../chamado';
 import { ChamadosService } from '../chamados.service';
 
@@ -14,8 +14,10 @@ import { ChamadosService } from '../chamados.service';
 export class ChamadosLista implements OnInit, OnDestroy {
   private chamadosService = inject(ChamadosService);
   private cdr = inject(ChangeDetectorRef);
+
   private assinaturaBusca?: Subscription;
   private assinaturaStatus?: Subscription;
+
   private consultaAtual?: Subscription;
 
   busca = new FormControl('', { nonNullable: true });
@@ -45,16 +47,20 @@ export class ChamadosLista implements OnInit, OnDestroy {
 
     this.consultaAtual = this.chamadosService
       .consultarChamados(this.busca.value, this.filtroStatus.value)
+      .pipe(
+        catchError(() => {
+          this.erro = 'Não foi possível carregar os chamados.';
+          return of([]);
+        }),
+        finalize(() => {
+          console.log('Consulta finalizada')
+          this.carregando = false;
+          this.cdr.markForCheck();
+        }),
+      )
       .subscribe({
         next: (dados) => {
           this.chamados = dados;
-          this.carregando = false;
-          this.cdr.markForCheck();
-        },
-        error: () => {
-          this.erro = 'Não foi possível carregar os chamados.';
-          this.carregando = false;
-          this.cdr.markForCheck();
         },
       });
   }
