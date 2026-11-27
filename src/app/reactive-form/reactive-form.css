@@ -271,6 +271,58 @@ button:disabled {
   grid-column: 1 / -1;
 }
 
+.form-section {
+  box-sizing: border-box;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-cancelar {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid #1768a8;
+  border-radius: 6px;
+  background: white;
+  color: #1768a8;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-cancelar:hover {
+  background: #e6f0fa;
+}
+
+.btn-cancelar:focus-visible {
+  outline: 2px solid #1768a8;
+  outline-offset: 3px;
+}
+
+.required-hint {
+  margin: 0;
+}
+
+@media (max-width: 650px) {
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
 @media (max-width: 600px) {
   .summary-grid {
     grid-template-columns: 1fr;

@@ -54,13 +54,27 @@
       </fieldset>
 
       <footer class="form-footer">
-        <p class="required-hint">* Campos de preenchimento obrigatório</p>
-        <button type="submit" [disabled]="chamadoForm.invalid || salvando">
-          {{ id ? 'Salvar alterações' : 'Registrar chamado' }}
-        </button>
-      </footer>
+  <p class="required-hint">* Campos de preenchimento obrigatório</p>
+
+  <div class="form-actions">
+    <a
+      class="btn-cancelar"
+      [routerLink]="id ? ['/chamados', id] : ['/chamados']"
+    >
+      Cancelar
+    </a>
+
+    <button type="submit" [disabled]="chamadoForm.invalid || salvando">
+      {{ id ? 'Salvar alterações' : 'Registrar chamado' }}
+    </button>
+  </div>
+</footer>
     </form>
   }
 
-  <a [routerLink]="id ? ['/chamados', id] : ['/chamados']">Cancelar</a>
+  @if (falhaAoCarregar) {
+  <a class="btn-cancelar" routerLink="/chamados">
+    Voltar para a lista
+  </a>
+}
 </section>

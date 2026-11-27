@@ -1,26 +1,59 @@
 <section class="pagina">
   @if (chamado; as registro) {
     <h1>{{ registro.titulo }}</h1>
+
     <div class="painel">
-      <p>Chamado {{ registro.id }} · {{ registro.status }}</p>
-      <p>Categoria: {{ registro.categoria }}</p>
+      <div class="painel-header">
+        <span>Chamado #{{ registro.id }}</span>
+        <span class="status">{{ registro.status }}</span>
+      </div>
+
+      <p><strong>Categoria:</strong> {{ registro.categoria }}</p>
       <p>{{ registro.descricao }}</p>
     </div>
+
     @if (erroExclusao) {
-      <p role="alert">{{ erroExclusao }}</p>
+      <p class="erro" role="alert">{{ erroExclusao }}</p>
     }
-    @if (!excluindo) {
-      <a [routerLink]="['/chamados', registro.id, 'editar']">Editar chamado</a>
-    }
-    <button type="button" (click)="excluir()" [disabled]="excluindo">Excluir chamado</button>
   } @else if (carregando) {
     <p role="status">Carregando chamado…</p>
   } @else if (erroConsulta) {
-    <p role="alert">{{ erroConsulta }}</p>
+    <p class="erro" role="alert">{{ erroConsulta }}</p>
   } @else {
     <h1>Chamado não encontrado</h1>
     <p>O identificador informado não corresponde a um chamado da lista.</p>
   }
 
-  <button type="button" (click)="voltar()" [disabled]="excluindo">Voltar para a lista</button>
+  <div class="acoes">
+    <button
+      class="btn btn-secundario"
+      type="button"
+      (click)="voltar()"
+      [disabled]="excluindo"
+    >
+      Voltar para a lista
+    </button>
+
+    @if (chamado; as registro) {
+      <div class="acoes-chamado">
+        @if (!excluindo) {
+          <a
+            class="btn btn-primario"
+            [routerLink]="['/chamados', registro.id, 'editar']"
+          >
+            Editar chamado
+          </a>
+        }
+
+        <button
+          class="btn btn-perigo"
+          type="button"
+          (click)="excluir()"
+          [disabled]="excluindo"
+        >
+          {{ excluindo ? 'Excluindo...' : 'Excluir chamado' }}
+        </button>
+      </div>
+    }
+  </div>
 </section>
